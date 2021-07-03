@@ -76,22 +76,22 @@ type PusherExecutionMe struct {
 	OrderID   int   `json:"order_id"`
 	CreatedAt int64 `json:"created_at"`
 
-	Quantity      float64 `json:"quantity,string"`
-	Price         float64 `json:"price,string"`
-	TakerSide     string  `json:"taker_side"`
-	MySide        string  `json:"my_side"`
-	ClientOrderID string  `json:"client_order_id"`
+	Quantity      json.Number `json:"quantity"`
+	Price         json.Number `json:"price"`
+	TakerSide     string      `json:"taker_side"`
+	MySide        string      `json:"my_side"`
+	ClientOrderID string      `json:"client_order_id"`
 
 	Delay time.Duration
 }
 
 // PusherExecution for Pusher
 type PusherExecution struct {
-	CreatedAt int64   `json:"created_at"`
-	ID        int     `json:"id"`
-	Price     float64 `json:"price,string"`
-	Quantity  float64 `json:"quantity,string"`
-	TakerSide string  `json:"taker_side"`
+	CreatedAt int64       `json:"created_at"`
+	ID        int         `json:"id"`
+	Price     json.Number `json:"price,string"`
+	Quantity  json.Number `json:"quantity,string"`
+	TakerSide string      `json:"taker_side"`
 
 	Delay time.Duration
 }
