@@ -98,6 +98,7 @@ func (c *Client) newRequest(method, spath string, body io.Reader, params *map[st
 	// avoid Pointer's butting
 	u := *c.URL
 	u.Path = c.URL.Path + spath
+	s, _ := url.Parse(spath)
 
 	if params != nil {
 		q := u.Query()
@@ -105,10 +106,11 @@ func (c *Client) newRequest(method, spath string, body io.Reader, params *map[st
 			q.Set(k, v)
 		}
 		u.RawQuery = q.Encode()
+		s.RawQuery = q.Encode()
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"path":     spath,
+		"path":     s.String(),
 		"nonce":    time.Now().UnixNano(),
 		"token_id": c.TokenNumber,
 	})
